@@ -29,7 +29,7 @@ html, body{
 
     display: grid;
 
-    grid-template-columns: 1fr;
+    grid-template-columns: 40vw;
     grid-template-rows: 10vh 20vh;
     grid-template-areas: "form" "res";
 
