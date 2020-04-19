@@ -29,9 +29,11 @@ function handleKeyUp(event) {
     .then(users => {
         users.map(user => {
             const li = document.createElement('li')
+            const image = document.createElement('img')
 
-            li.append(user.name)
-            li.style.width = document.querySelector('input')
+            image.src = './external-links.svg'
+
+            li.append(user.name, image)
             
             if(usersList.length === 0){
                 usersList.push(li)
