@@ -9,22 +9,51 @@
     <title>Request & Response</title>
 </head>
 <body>
+    <div class="user-container">
+        <header class="user-head">
+            <h1>USER</h1>
+            <button class="close">
+                <img src="../frontend/images/x-circle.svg" alt="exit" width="24px" height="24px">
+            </button>
+        </header>
+        <section class="information-user">
+            <ul class="res-information-user">
+                <li id="information-name">
+                    Name:<span></span>
+                </li>
+                <li id="information-username">
+                    Username:<span></span>
+                </li>
+                <li id="information-email">
+                    E-mail:<span></span>
+                </li>
+                <li id="information-website">
+                    Web Site:<span></span>
+                </li>
+                <li id="information-phone">
+                    Phone:<span></span>
+                </li>
+            </ul>
+           
+        </section>
+    </div>
     <div class="container">
         <header class="head">
             <h1>Informe um usuário</h1>
         </header>
-        <section>
+        <section class="sec">
             <form class="form-user">
                 <input type="text" placeholder="Informe o usuário">
             </form>
-            <ul>
+            <ul class="list">
                 <li class="search">Search a user</li>
             </ul>
-            
+                
         </section>
         <footer>
             <p>by Vinicius Jimenez &copy;</p>
         </footer>
+    </div>
         
     </div>
     <script src="./scripts/search.js"></script>
