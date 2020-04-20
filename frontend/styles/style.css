@@ -113,5 +113,18 @@ li{
 
     font-size: 12px;
 }
+.res{
+    border-radius: 5px;
+}
 
+.res:hover {
+    background-color: #00000007
+}
+button{
+    width: 16px;
+    height: 16px;
+
+    background: none;
+    border: none;
+}
 

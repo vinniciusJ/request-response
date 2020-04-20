@@ -10,6 +10,13 @@ const filterUsers = async (name) =>
 const debounceEvent = (fn, wait = 200, time) =>  (...args) =>
     clearTimeout(time, time = setTimeout(() => fn(...args), wait))
     
+function openiFrame(){
+    const iFrame = document.createElement('iframe')
+    
+    iFrame.src = 'http://www.google.com'
+    document.appendChild(iFrame)
+    
+}
 
 function handleKeyUp(event) {
     let usersList = []
@@ -29,11 +36,18 @@ function handleKeyUp(event) {
     .then(users => {
         users.map(user => {
             const li = document.createElement('li')
-            const image = document.createElement('img')
+            const img = document.createElement('img')
+            const button = document.createElement('button')
 
-            image.src = './external-links.svg'
+            img.src = '../frontend/images/external-link.svg'
+            img.style.width = '16px'
+            img.style.height = '16px'
 
-            li.append(user.name, image)
+            button.append(img)
+            button.onclick = 'openiFrame()'
+
+            li.className = 'res'
+            li.append(user.name, button)
             
             if(usersList.length === 0){
                 usersList.push(li)
@@ -65,3 +79,6 @@ function notNull(str){
 
 document.querySelector("input")
 .addEventListener("keyup", debounceEvent(handleKeyUp, 500))
+
+
+
