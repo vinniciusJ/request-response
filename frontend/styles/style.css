@@ -42,6 +42,8 @@ html, body{
     grid-template-rows: 8vh 1fr;
     grid-template-areas: "form" "res";
 
+    left: 20px;
+
 }
 .container section .form-user {
     
@@ -107,11 +109,13 @@ li{
 .search{
     opacity: 0.5;
     margin-top: -20px;
-    margin-left: 8px;
+    margin-left: 5%;
 
     border: none;
 
     font-size: 12px;
+
+    padding: 10px 0 0 0;
 }
 .res{
     border-radius: 5px;
