@@ -14,8 +14,10 @@ const debounceEvent = (fn, wait = 200, time) =>  (...args) =>
 
 function handleKeyUp(event) {
     let usersList = []
-
     let name = String(event.target.value)
+
+    liSearch.textContent = 'Search a user'
+    liSearch.style.color = 'black'
 
     if(!notNull(name)){
         ul.innerHTML = ''
@@ -27,83 +29,94 @@ function handleKeyUp(event) {
     if(name == '*'){
         name = ' '
     }
+    
+    filterUsers(name).then(users => {
+        
+        if(users.length === 0){
+            liSearch.textContent = `"${name}" not found`
+            liSearch.style.color = 'red'
+            liSearch.style.fontWeight = 'bolder'
 
-    filterUsers(name)
-    .then(users => {
-        users.map(user => {
-            const li = document.createElement('li')
-            const img = document.createElement('img')
-            const button = document.createElement('button')
-
-            img.src = '../frontend/images/external-link.svg'
-            img.style.width = '16px'
-            img.style.height = '16px'
-
-            button.append(img)
-
-            li.className = 'res'
-            li.append(user.name)
-
-            button.addEventListener('click', () =>{
-                const container = document.querySelector('.container')
-                const userContainer = document.querySelector('.user-container')
-                
-                const ulInformation = document.querySelector('.res-information-user')
-
-                container.style.display = 'none'
-                userContainer.style.display = 'initial'
-
-                const buttonClose = document.querySelector('.close')
-                const imagemClose = document.querySelector('.close img')
-                
-                const datas = ['name', 'username', 'email', 'website', 'phone']
-                let datasList = []
-
-                datas.map(type => {
-                    const liData = document.querySelector(`#information-${type} span`)
-                    liData.textContent = user[type]
-                    datasList.push(liData)
+            ul.append(liSearch)
+        }
+        else {
+            users.map(user => {
+                const li = document.createElement('li')
+                const img = document.createElement('img')
+                const button = document.createElement('button')
+        
+                img.src = '../frontend/images/external-link.svg'
+                img.style.width = '16px'
+                img.style.height = '16px'
+        
+                button.append(img)
+        
+                li.className = 'res'
+                li.append(user.name)
+        
+                button.addEventListener('click', () =>{
+                    const container = document.querySelector('.container')
+                    const userContainer = document.querySelector('.user-container')
+                        
+                    const ulInformation = document.querySelector('.res-information-user')
+        
+                    container.style.display = 'none'
+                    userContainer.style.display = 'initial'
+        
+                    const buttonClose = document.querySelector('.close')
+                    const imagemClose = document.querySelector('.close img')
+                        
+                    const datas = ['name', 'username', 'email', 'website', 'phone']
+                    let datasList = []
+        
+                    datas.map(type => {
+                        const liData = document.querySelector(`#information-${type}`)
+                        liData.textContent = user[type]
+                        datasList.push(liData)
+                    })
+        
+                    datasList.map(liData => {
+                        ulInformation.append(liData)
+                    })
+        
+                    imagemClose.addEventListener('mouseover', () => {
+                        imagemClose.src = '../frontend/images/x-circle-close.svg'
+                    })
+                        
+                    buttonClose.addEventListener('click', () => {
+                            
+                        for(let i = 0; i < datasList.length; i++){
+                            datasList[i].textContent = ''
+                        }
+                            
+                        container.style.display = 'grid'
+                        userContainer.style.display = 'none'
+                    })
+                        
                 })
-
-                datasList.map(liData => {
-                    ulInformation.append(liData)
-                })
-
-                imagemClose.addEventListener('mouseover', () => {
-                    imagemClose.src = '../frontend/images/x-circle-close.svg'
-                })
-                
-                buttonClose.addEventListener('click', () => {
+        
+                li.append(button)
                     
-                    for(let i = 0; i < datasList.length; i++){
-                        datasList[i].textContent = ''
-                    }
-                    
-                    container.style.display = 'grid'
-                    userContainer.style.display = 'none'
-                })
-                
-            })
-
-            li.append(button)
-            
-            if(usersList.length === 0){
-                usersList.push(li)
-            }
-            else {
-                usersList.map(user => {
-                    if(user.name != li.textContent){
+                if(usersList.length === 0){
                         usersList.push(li)
-                    }
-                })
-            }
-        })
-
-        usersList.map(user => {
-            section.style.height += user.height
-            ul.appendChild(user)
-        })
+                }
+                else {
+                    usersList.map(user => {
+                        if(user.name != li.textContent){
+                            usersList.push(li)
+                        }
+                    })
+                }
+            })
+        }
+        if(usersList.length !== 0){
+            usersList.map(user => {
+                section.style.height += user.height
+                ul.appendChild(user)
+            })
+        }
     })
+   
     ul.innerHTML = ' '
 }
 function notNull(str){
@@ -117,7 +130,7 @@ function notNull(str){
 
 
 document.querySelector("input")
-.addEventListener("keyup", debounceEvent(handleKeyUp, 500))
+.addEventListener("keyup", debounceEvent(handleKeyUp, 200))
 
 
 

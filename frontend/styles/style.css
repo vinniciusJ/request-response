@@ -38,7 +38,7 @@ html, body{
 
     border-radius: 10px;
 
-    grid-template-columns: 1fr;
+    grid-template-columns: 40vw;
     grid-template-rows: 8vh 1fr;
     grid-template-areas: "form" "res";
 
@@ -121,8 +121,6 @@ li{
     background-color: #00000007
 }
 button{
-
-
     background: none;
     border: none;
 }
@@ -159,7 +157,20 @@ button{
     height: 30px;
     width: 30px;
 }
-.res-information-user li{
+
+.information-user{
     display: flex;
-    flex-direction: row;
+    flex-direction: column 2;
+
+    justify-content: space-between;
+
+    margin-left: 20px;
+    margin-right: 20px;
 }
+.information-user .attributes .data{
+    margin: 0;
+}
+.information-user .res-information-user{
+    text-align: end;
+}
+
